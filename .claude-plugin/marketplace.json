@@ -11,6 +11,15 @@
         "repo": "NishantJoshi00/sidekick"
       },
       "description": "Neovim integration for Claude Code"
+    },
+    {
+      "name": "critic",
+      "source": ".",
+      "description": "Create personas to test and vet your work",
+      "strict": false,
+      "commands": [
+        "./commands/critic.md"
+      ]
     }
   ]
 }

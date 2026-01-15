@@ -8,23 +8,50 @@ description: Create user personas to test and vet your work
 
 The user provided: $ARGUMENTS
 
-**Expected format:** `<count> <profile and situation>, <what to vet>`
+**This command accepts natural language input.** Examples:
+- `what would senior engineers feel about this landing page`
+- `5 skeptical developers scrolling twitter reviewing my launch post`
+- `would busy founders sign up for this? simulate 3 personas`
+- `junior devs looking at the README`
 
-Example: `5 skeptical developers scrolling twitter, vetting this launch post`
+## Parsing Strategy
 
-**Parse the arguments to extract:**
-1. **Count** - Number of personas (e.g., "5", "3")
-2. **Profile and situation** - User type and context (e.g., "skeptical developers scrolling twitter", "busy founders visiting a landing page")
-3. **What to vet** - The content, flow, or artifact to review (e.g., "this launch post", "the signup flow", "README.md")
+**Extract these elements from the natural language input:**
 
-**If any of these are unclear or missing, ask the user before proceeding.**
+1. **Count** (default: 5 if not specified)
+   - Look for explicit numbers: "5", "3", "seven"
+   - Look for phrases: "simulate X personas", "X people"
+   - Implied quantities: "a few" → 3, "several" → 5
+   - If not found, use **default of 5**
 
-**After parsing, clarify how to access the content:**
-- If "what to vet" references "this", "the above", or is ambiguous, ask the user to paste the content or provide a file path
-- If it's a file path (e.g., "README.md", "docs/landing.html"), confirm the path exists
-- If it's a workflow or flow (e.g., "signup flow"), ask what you should review (code, UI, user journey)
+2. **Persona** (required - ask if unclear)
+   - Who: "senior engineers", "skeptical developers", "busy founders", "junior devs"
+   - Optional context/situation: "scrolling twitter", "visiting a landing page", "looking at the README"
+   - **If vague** ("people", "users", "someone") → **ASK** "Who specifically should I simulate?"
+   - **If missing entirely** → **ASK** for persona description
 
-**You should ask questions when needed** - don't guess or assume. Get clarity before launching personas.
+3. **Target** (required - ask if unclear)
+   - What to review: "this landing page", "my launch post", "the README", "signup flow"
+   - Check if referenced content is:
+     - In recent conversation ("this", "the above")
+     - A file that exists in the project
+     - Needs to be provided by user
+   - **If ambiguous** ("this", "it") with no clear context → **ASK** what to review
+   - **If missing entirely** → **ASK** what should be reviewed
+
+## Confirmation Before Spawning
+
+**CRITICAL: Always confirm before launching personas.**
+
+After parsing, present to the user:
+- **Count**: X personas
+- **Who**: [persona description]
+- **Reviewing**: [target description]
+- **How you'll access it**: [file path / pasted content / conversation context]
+
+Ask: "Should I proceed with spawning these personas?"
+
+Only launch after user confirms.
 
 ---
 

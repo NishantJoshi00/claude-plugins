@@ -1,0 +1,16 @@
+{
+  "name": "nishantjosh-plugins",
+  "owner": {
+    "name": "Nishant Joshi"
+  },
+  "plugins": [
+    {
+      "name": "sidekick",
+      "source": {
+        "source": "github",
+        "repo": "NishantJoshi00/sidekick"
+      },
+      "description": "Neovim integration for Claude Code"
+    }
+  ]
+}

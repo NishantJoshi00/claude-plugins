@@ -14,7 +14,7 @@
     },
     {
       "name": "critic",
-      "source": ".",
+      "source": "./",
       "description": "Create personas to test and vet your work",
       "strict": false,
       "commands": [
